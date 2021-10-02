@@ -1,0 +1,3 @@
+local scarlet = {}
+
+return scarlet

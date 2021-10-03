@@ -1,5 +1,5 @@
 <div align="center">
-	<image src="images/svg/logo_concept.svg">
+	<image src="images/svg/scarlet_logo_concept.svg">
 	<h1> Scarlet, network unified module loader and framework </h1>
 </div>
 

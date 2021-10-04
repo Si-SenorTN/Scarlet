@@ -1,6 +1,6 @@
 # Scarlet
 
-<img align="right" src="images/svg/scarlet_logo.svg" width="120em" style="margin-left: 20px;">
+<img align="right" src="images/svg/scarlet_icon.svg" width="120em" style="margin-left: 2em">
 
 Scarlet is a module loader designed to bridge the gap between the client-server model, while at the same time allowing for the user to have free structure to their codebase.
 

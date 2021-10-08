@@ -216,7 +216,7 @@ Scarlet can easily mount itself onto other frameworks.
 
 ## Knit
 
-lets take a look at a current popular framework, such as [Knit](github.com/sleitnick/knit).
+lets take a look at a current popular framework, such as [Knit](https://github.com/Sleitnick/Knit).
 
 Knit has `Controllers` and `Services` dictionaries we can mount onto. Take for example:
 
@@ -266,4 +266,4 @@ return test
 
 On the client this method is identical. Just index `Knit.Controllers` rather than `Knit.Services`
 
-There are many other frameworks that implement this pattern, such as [AeroGameFramework](github.com/sleitnick/aerogameframework)
+There are many other frameworks that implement this pattern, such as [AeroGameFramework](https://github.com/Sleitnick/AeroGameFramework)

@@ -176,3 +176,5 @@ end
 
  ## Mount
 
+Onto the main event, Scarlet has the ability to 'Mount' dictionaries/arrays of objects and call `Scarlet.Implemets()` on them automatically.
+

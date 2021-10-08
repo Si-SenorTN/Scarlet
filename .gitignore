@@ -1,1 +1,7 @@
-/images/png
+# literals
+images/
+
+# except
+!scarlet_logo.svg
+
+DOCUMENTATION.md

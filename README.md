@@ -2,14 +2,21 @@
 
 <img align="right" src="images/svg/scarlet_icon.svg" width="120em" style="margin-left: 2em">
 
-Scarlet is a module loader designed to bridge the gap between the client-server model, while at the same time allowing for the user to have free structure to their codebase.
+Scarlet is an object-event utility library useful for mounting events to objects.
 
-Scarlets in house utility provides a vast library of easy to use modules.
+⚠ Scarlet is currently at a very early alpha build. Keep this in mind when attempting to use in a project. ⚠
 
-jargon
+* [Installation](#Installation)
+* [Ending notes](#Ending-notes)
 
 ---
 
-# About
-
 # Installation
+
+Installing Scarlet is very easy. Simply download Scarlet as a zip and insert into your project. Scarlets preferred home is `ReplicatedStorage`, but it can technically exist anywhere.
+
+# Usage
+
+read the [documentation](url.github.io/scarlet) for example usage.
+
+ # Ending notes

@@ -1,0 +1,16 @@
+{
+	"name": "Scarlet",
+	"tree": {
+		"$className": "DataModel",
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"Scarlet": {
+				"$path": "src/Scarlet"
+			}
+		},
+		"ServerScriptService": {
+			"$className": "ServerScriptService",
+			"$path": "src/test"
+		}
+	}
+}

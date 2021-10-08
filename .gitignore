@@ -1,7 +1,4 @@
-# literals
-images/
+png
 
-# except
-!scarlet_logo.svg
-
-DOCUMENTATION.md
+*.svg
+!scarlet_icon.svg

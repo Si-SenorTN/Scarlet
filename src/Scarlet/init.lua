@@ -27,23 +27,6 @@ type InterfaceDictionary = {
 	[InterfaceName]: Interface
 }
 
-
---[[
-	THINGS WE WANT TO ACHIEVE
-
-	patterns such as:
-
-	Scarlet.Mount(objectContainingManyObjects)
-
-	Scarlet.Implements(object: table)
-
-	Scarlet.Unmount()
-
-	function service:OnPlayerAdded(player: Player) end
-	function service:OnCharacterAdded(character: Model) end
-
-]]
-
 function Scarlet.Mount(objectThatContainsManyObjects: t, interface: InterfaceDictionary)
 	-- mount to existing objects
 	for index, newObject in pairs(objectThatContainsManyObjects) do

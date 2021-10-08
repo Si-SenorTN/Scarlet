@@ -23,8 +23,6 @@ type t = {
 	[any]: any
 }
 
-type InterfaceName = string
-
 type Interface = {
 	Event: RBXScriptSignal,
 	self: t,
@@ -32,7 +30,7 @@ type Interface = {
 }
 
 type InterfaceDictionary = {
-	[InterfaceName]: Interface
+	[string]: Interface
 }
 
 type Objects = {
@@ -53,10 +51,6 @@ if RunService:IsServer() then
 	}
 
 	interfaces.MyObject.OnPlayerAdded = playerAddedInterface
-
-	interfaces.Knit = {
-		OnPlayerAdded = playerAddedInterface
-	}
 elseif RunService:IsClient() then
 	local player = Players.LocalPlayer
 

@@ -15,8 +15,6 @@ type t = {
 	[any]: any
 }
 
-type InterfaceName = string
-
 type Interface = {
 	Event: RBXScriptSignal,
 	self: t,
@@ -24,7 +22,7 @@ type Interface = {
 }
 
 type InterfaceDictionary = {
-	[InterfaceName]: Interface
+	[string]: Interface
 }
 
 function Scarlet.Mount(objectThatContainsManyObjects: t, interface: InterfaceDictionary)
@@ -44,6 +42,10 @@ function Scarlet.Mount(objectThatContainsManyObjects: t, interface: InterfaceDic
 end
 
 
+-- **TODO:** possibly make more modular. adding utility methods to interfaces
+-- and behaviors such as `interface:Pause()` and `interface:Resume()`
+--
+-- might need `interface:Unmount()` as a means of breaking out of event connections
 function Scarlet.Implements(object: t, interface: InterfaceDictionary)
 	for methodName, methodData in pairs(interface) do
 		if not object[methodName] then
@@ -52,6 +54,7 @@ function Scarlet.Implements(object: t, interface: InterfaceDictionary)
 
 		if methodData.GetExisting then
 			if type(methodData.GetExisting) == "function" then
+				-- TODO: match all cases, not just table returns
 				for _, v in pairs(methodData.GetExisting(methodData.self)) do
 					task.defer(object[methodName], object, v)
 				end

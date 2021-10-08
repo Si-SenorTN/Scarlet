@@ -4,7 +4,6 @@ local Scarlet = require(game:GetService("ReplicatedStorage").Scarlet)
 local myObject = {}
 myObject.__index = myObject
 
-
 function myObject.new()
 	local self = setmetatable({}, myObject)
 	self._numValue = Instance.new("NumberValue")

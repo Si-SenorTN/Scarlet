@@ -1,7 +1,9 @@
 * [Usage](#Usage)
-	* [Implements](#Implements)
-	* [Extend](#Extending-interfaces-on-the-fly)
-	* [Mount](#Mount)
+	* [Implements](#implements)
+	* [Extend](#extending-interfaces-on-the-fly)
+	* [Mount](#mount)
+* [Frameworks](#usage-with-frameworks)
+	* [Knit](#knit)
 
 # Usage
 
@@ -118,7 +120,7 @@ end
 return testObject
 ```
 
-Thats it! this object will now listen to player added events, and out print will run correctly.
+Thats it! this object will now listen to player added events, and our print will run correctly.
 
 Our interfaces can also be expanded upon, take for example:
 
@@ -172,9 +174,96 @@ function testObject.new(instance: Instance)
 end
 ```
 
- Once extended, it will **not** overwrite the original interface, this makes it using template interfaces much more convenient.
+Once extended, it will **not** overwrite the original interface, this makes using template interfaces much more convenient.
 
- ## Mount
+## Mount
 
 Onto the main event, Scarlet has the ability to 'Mount' dictionaries/arrays of objects and call `Scarlet.Implemets()` on them automatically.
 
+An example of this could be:
+
+```lua
+local services = {}
+services.MyService = {
+	init = function() end,
+	OnPlayerAdded = function(player)
+		print(player.Name.." has entered the game")
+	end
+
+}
+
+Scarlet.Mount(services, Scarlet.Interfaces.myTest)
+```
+
+Obviously this is a pretty impractical setup, but the idea is there nonetheless.
+
+`Scarlet.Mount()` also listens to table additions, automatically calling `Scarlet.Implements()` on the newly added table
+
+```lua
+local services = Scarlet.Mount({}, Scarlet.Interfaces.myTest)
+
+services.MyService = {
+	init = function() end,
+	OnPlayerAdded = function(player)
+		print(player.Name.." has entered the game")
+	end
+}
+```
+
+# Usage with frameworks
+
+Scarlet can easily mount itself onto other frameworks.
+
+## Knit
+
+lets take a look at a current popular framework, such as [Knit](github.com/sleitnick/knit).
+
+Knit has `Controllers` and `Services` dictionaries we can mount onto. Take for example:
+
+```lua
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local someServiceDirectory
+
+local Scarlet = require(ReplicatedStorage.Scarlet)
+local Knit = require(ReplicatedStorage.Knit)
+
+Scarlet.Mount(Knit.Services, Scarlet.Interfaces.myTest)
+
+Knit.AddServices(someServiceDirectory)
+
+Knit.Start()
+```
+
+Scarlet will listen to every added service and implement our interface.
+Now we can create behaviors such as this:
+
+```lua
+local Knit = require(game:GetService("ReplicatedStorage").Knit)
+
+local test = Knit.CreateService {
+	Name = "test",
+	Client = {},
+}
+
+
+function test:OnPlayerAdded(player)
+
+end
+
+
+function test:KnitStart()
+
+end
+
+
+function test:KnitInit()
+
+end
+
+
+return test
+```
+
+On the client this method is identical. Just index `Knit.Controllers` rather than `Knit.Services`
+
+There are many other frameworks that implement this pattern, such as [AeroGameFramework](github.com/sleitnick/aerogameframework)

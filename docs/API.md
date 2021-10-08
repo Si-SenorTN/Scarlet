@@ -1,16 +1,31 @@
 # Scarlet
 
 ## `Scarlet.Interfaces: [InterfaceDictionary]: Interface`
-dictionary containing template interfaces for scarlet
+Dictionary containing template interfaces for scarlet.
 
 ## `Scarlet.Copy(t: [any]: any)` -> `[any]: any`
-copies a table
+Copies a table.
 
 ## `Scarlet.Extend(t: [any]: any, extension: [any]: any)` -> `[any]: any`
-copies and extends a table, leaving the original table alone
+Copies and extends a table, leaving the original table alone.
 
 ## `Scarlet.Mount(t: [any]: any, interface: Interface)` -> `t`
-Mounts and listens to added tables from `t` natively calls `Scarlet.Implemets()` on all tables using the passed `interface`
+Mounts and listens to added tables from `t`, natively calls `Scarlet.Implemets()` on all tables implementing the passed `interface`.
 
 ## `Scarlet.Implements(t: [any]: any, interface: Interface)` -> `t`
-Implements the passed `interface` onto the passed `t` object
+Implements the passed `interface` onto the passed `t` object.
+
+# Interface
+An Interface is a dictionary containing our necessary interface data.
+
+## `Interface.self: [any]: any | Instance`
+Holds a reference to the super object we're pointing to our events and methods from.
+As per lua OOP laws, in order to call an instance method via `object[methodName](...)` we must include the `self` object as the first argument: `object[methodName](self, ...)`.
+
+## `Interface.Event: RBXScriptSignal`
+Holds a reference to the event we want to link our instance method to.
+
+## `@opt Interface.GetExisting: ((...any) -> ...any) | any`
+Optional field holding a reference to either a function or non nil value that will be used an an `init` method to use any pre existing value.
+
+an example of this is a character added event, listening to the event and also calling a custom `onCharacterAdded` method to kick off state incase we miss the initial event invocation.

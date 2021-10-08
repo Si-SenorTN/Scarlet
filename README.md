@@ -1,6 +1,6 @@
 # Scarlet
 
-<img align="right" src="images/svg/scarlet_icon.svg" width="120em" style="margin-left: 2em">
+<img align="right" src="docs/images/svg/scarlet_icon.svg" width="120em" style="margin-left: 2em">
 
 Scarlet is an object-event utility library useful for mounting events to objects.
 

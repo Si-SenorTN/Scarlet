@@ -2,7 +2,7 @@
 
 <img align="right" src="docs/images/svg/scarlet_icon.svg" width="120em" style="margin-left: 2em">
 
-Scarlet is an object-event utility library useful for mounting events to instance methods.
+Scarlet is an object-event utility framework useful for mounting events to instance methods.
 
 ⚠ Scarlet is currently at a very early alpha build. Keep this in mind when attempting to use itin a project. Current build may be unstable for current work. ⚠
 

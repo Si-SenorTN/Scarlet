@@ -2,6 +2,7 @@
 	* [Implements](#implements)
 	* [Extend](#extending-interfaces-on-the-fly)
 	* [Mount](#mount)
+	* [Disconnect](#disconnect)
 * [Frameworks](#usage-with-frameworks)
 	* [Knit](#knit)
 

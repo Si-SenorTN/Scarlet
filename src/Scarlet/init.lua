@@ -5,6 +5,7 @@
 -- 10/6/21
 
 local MountUtils = require(script.Util.MountUtils)
+local Disconnect = require(script.Util.Disconnect)
 
 local applyNameConvention = require(script.Util.applyNameConvention)
 local interfaces = require(script.InterfacePresets)
@@ -26,19 +27,21 @@ type InterfaceDictionary = {
 }
 
 function Scarlet.Mount(objectThatContainsManyObjects: t, interface: InterfaceDictionary)
+	local disconnect = Disconnect.new({})
+
 	-- mount to existing objects
 	for index, newObject in pairs(objectThatContainsManyObjects) do
 		if type(index) == "string" and type(newObject) == "table" then
-			Scarlet.Implements(newObject, interface)
+			disconnect:AddConnection(Scarlet.Implements(newObject, interface))
 		end
 	end
 
 	-- observe and subscribe on new objects added
 	MountUtils.observe(objectThatContainsManyObjects, function(_, newObject)
-		Scarlet.Implements(newObject, interface)
+		disconnect:AddConnection(Scarlet.Implements(newObject, interface))
 	end)
 
-	return objectThatContainsManyObjects
+	return disconnect
 end
 
 
@@ -47,6 +50,8 @@ end
 --
 -- might need `interface:Unmount()` as a means of breaking out of event connections
 function Scarlet.Implements(object: t, interface: InterfaceDictionary)
+	local disconnect = Disconnect.new({})
+
 	for methodName, methodData in pairs(interface) do
 		if not object[methodName] then
 			continue
@@ -56,19 +61,19 @@ function Scarlet.Implements(object: t, interface: InterfaceDictionary)
 			if type(methodData.GetExisting) == "function" then
 				-- TODO: match all cases, not just table returns
 				for _, v in pairs(methodData.GetExisting(methodData.self)) do
-					task.defer(object[methodName], object, v)
+					task.spawn(object[methodName], object, v)
 				end
 			else
 				object[methodName](object, methodData.GetExisting)
 			end
 		end
 
-		methodData.Event:Connect(function(...)
+		disconnect:AddConnection(methodData.Event:Connect(function(...)
 			object[methodName](object, ...)
-		end)
+		end))
 	end
 
-	return object
+	return disconnect
 end
 
 

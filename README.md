@@ -4,7 +4,7 @@
 
 Scarlet is an object-event utility framework useful for mounting events to instance methods.
 
-⚠ Scarlet is currently at a very early alpha build. Keep this in mind when attempting to use itin a project. Current build may be unstable for current work. ⚠
+⚠ Scarlet is currently at a very early alpha build. Keep this in mind when attempting to use it in a project. Current build may be unstable for current work. ⚠
 
 ---
 

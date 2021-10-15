@@ -24,9 +24,7 @@ local function extend(t: tab, extension: tab)
 end
 
 local function respectOldMethod(newindex, ...)
-	if type(newindex) == "table" then
-		return newindex
-	elseif type(newindex) == "function" then
+	if type(newindex) == "function" then
 		newindex(...)
 	end
 end

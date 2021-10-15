@@ -48,8 +48,12 @@ All in all, your new interface file should look something like this:
 ```lua
 local Players = game:GetService("Players")
 
+type t = {
+	[any]: any
+}
+
 type Interface = {
-	self: [any]: any | Instance,
+	self: t | Instance,
 	Event: RBXScriptSignal,
 	GetExisting: ((...any) -> ...any?) | Instance?
 }
@@ -151,7 +155,7 @@ end
 
 return testObject
 ```
-this object will now listen to `RunService.RenderStep`, and update accordingly.
+this object will now listen to `RunService.RenderStepped`, and update accordingly.
 
 ## Extending interfaces on the fly
 
@@ -208,6 +212,21 @@ services.MyService = {
 		print(player.Name.." has entered the game")
 	end
 }
+```
+
+## Disconnect
+
+All of Scarlets constructor methods return a `Disconnect` object.
+This object is safe to pass to a [`Maid`](https://github.com/Quenty/NevermoreEngine/blob/version2/Modules/Shared/Events/Maid.lua), [`Janitor`](https://github.com/howmanysmall/Janitor), and various of other cleanup classes that consume `Disconnect` and or `Destroy` methods.
+
+```lua
+local disconnect = Scarlet.Implements(self, Scarlet.Interfaces.myTest)
+
+disconnect:Disconnect()
+disconnect:Destroy()
+
+maid:GiveTask(disconnect)
+janitor:Add(disconnect, "Disconnect", "Destroy")
 ```
 
 # Usage with frameworks

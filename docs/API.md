@@ -30,10 +30,10 @@ Optional field holding a reference to either a function or non nil value that wi
 
 an example of this is a character added event, listening to the event and also calling a custom `onCharacterAdded` method to kick off state incase we miss the initial event invocation.
 
-# Disconenct
+# Disconnect
 Object returned by Scarlets constructor methods as a means to clean up connections made.
 
-## `Connection` = `{ Disconnect: () -> (), Destroy: () -> () }`
+## `Connection` = `{ Disconnect: () -> () }`
 
 ## `ConnectionArray` = `{ [any]: Connection }`
 

@@ -26,6 +26,7 @@ type InterfaceDictionary = {
 	[string]: Interface
 }
 
+
 function Scarlet.Mount(objectThatContainsManyObjects: t, interface: InterfaceDictionary)
 	local disconnect = Disconnect.new({})
 
@@ -45,10 +46,6 @@ function Scarlet.Mount(objectThatContainsManyObjects: t, interface: InterfaceDic
 end
 
 
--- **TODO:** possibly make more modular. adding utility methods to interfaces
--- and behaviors such as `interface:Pause()` and `interface:Resume()`
---
--- might need `interface:Unmount()` as a means of breaking out of event connections
 function Scarlet.Implements(object: t, interface: InterfaceDictionary)
 	local disconnect = Disconnect.new({})
 

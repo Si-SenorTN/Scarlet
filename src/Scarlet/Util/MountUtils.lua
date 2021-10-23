@@ -42,7 +42,7 @@ end
 --- Observes additions made to a table, respecting existing metatables
 function MountUtils.observe(t: tab, onSubscribe: (name: string, newObject: tab) -> nil)
 	local extendedObject, __newindex
-	extendedObject, __newindex  = respectMetatableAndExtend(t, {
+	extendedObject, __newindex = respectMetatableAndExtend(t, {
 		__newindex = function(self: tab, newIndex: string?, newValue: tab?)
 			if type(newIndex) == "string" and type(newValue) == "table" then
 				onSubscribe(newIndex, newValue)

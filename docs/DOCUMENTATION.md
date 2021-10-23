@@ -2,7 +2,7 @@
 	* [Implements](#implements)
 	* [Extend](#extending-interfaces-on-the-fly)
 	* [Mount](#mount)
-	* [Disconnect](#disconnect)
+	* [Connection](#connection)
 * [Frameworks](#usage-with-frameworks)
 	* [Knit](#knit)
 
@@ -215,19 +215,21 @@ services.MyService = {
 }
 ```
 
-## Disconnect
+## Connection
 
-All of Scarlets constructor methods return a `Disconnect` object.
+All of Scarlets constructor methods return a `Connection` object.
 This object is safe to pass to a [`Maid`](https://github.com/Quenty/NevermoreEngine/blob/version2/Modules/Shared/Events/Maid.lua), [`Janitor`](https://github.com/howmanysmall/Janitor), and various of other cleanup classes that consume `Disconnect` and or `Destroy` methods.
 
 ```lua
-local disconnect = Scarlet.Implements(self, Scarlet.Interfaces.myTest)
+local connection = Scarlet.Implements(self, Scarlet.Interfaces.myTest)
 
-disconnect:Disconnect()
-disconnect:Destroy()
+connection:Add(rbxScriptConnection)
 
-maid:GiveTask(disconnect)
-janitor:Add(disconnect, "Disconnect", "Destroy")
+connection:Disconnect()
+connection:Destroy()
+
+maid:GiveTask(connection)
+janitor:Add(connection, "Connection", "Destroy")
 ```
 
 # Usage with frameworks

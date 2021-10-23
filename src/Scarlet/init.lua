@@ -5,7 +5,7 @@
 -- 10/6/21
 
 local MountUtils = require(script.Util.MountUtils)
-local Disconnect = require(script.Util.Disconnect)
+local Connection = require(script.Util.Connection)
 
 local applyNameConvention = require(script.Util.applyNameConvention)
 local interfaces = require(script.InterfacePresets)
@@ -28,26 +28,26 @@ type InterfaceDictionary = {
 
 
 function Scarlet.Mount(objectThatContainsManyObjects: t, interface: InterfaceDictionary)
-	local disconnect = Disconnect.new({})
+	local connection = Connection.new({})
 
 	-- mount to existing objects
 	for index, newObject in pairs(objectThatContainsManyObjects) do
 		if type(index) == "string" and type(newObject) == "table" then
-			disconnect:AddConnection(Scarlet.Implements(newObject, interface))
+			connection:Add(Scarlet.Implements(newObject, interface))
 		end
 	end
 
 	-- observe and subscribe on new objects added
 	MountUtils.observe(objectThatContainsManyObjects, function(_, newObject)
-		disconnect:AddConnection(Scarlet.Implements(newObject, interface))
+		connection:Add(Scarlet.Implements(newObject, interface))
 	end)
 
-	return disconnect
+	return connection
 end
 
 
 function Scarlet.Implements(object: t, interface: InterfaceDictionary)
-	local disconnect = Disconnect.new({})
+	local connection = Connection.new({})
 
 	for methodName, methodData in pairs(interface) do
 		if not object[methodName] then
@@ -65,12 +65,12 @@ function Scarlet.Implements(object: t, interface: InterfaceDictionary)
 			end
 		end
 
-		disconnect:AddConnection(methodData.Event:Connect(function(...)
+		connection:Add(methodData.Event:Connect(function(...)
 			object[methodName](object, ...)
 		end))
 	end
 
-	return disconnect
+	return connection
 end
 
 

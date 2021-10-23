@@ -42,7 +42,7 @@ Scarlet.Implements(object, Scarlet.Extend(Scarlet.Interfaces.MyObject, {
 --> example usage with knit
 local servicesFolder
 local Knit = require(game:GetService("ReplicatedStorage").Knit)
-Scarlet.Mount(Knit.Services, Scarlet.TestInterface.Knit)
+Scarlet.Mount(Knit.Services, Scarlet.Interfaces.Knit)
 
 Knit.AddServices(servicesFolder)
 

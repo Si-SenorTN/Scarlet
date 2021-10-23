@@ -9,10 +9,10 @@ Copies a table.
 ## `Scarlet.Extend(t: [any]: any, extension: [any]: any)` -> `[any]: any`
 Copies and extends a table, leaving the original table alone.
 
-## `Scarlet.Mount(t: [any]: any, interface: Interface)` -> `Disconnect`
+## `Scarlet.Mount(t: [any]: any, interface: Interface)` -> `Connection`
 Mounts and listens to added tables from `t`, natively calls `Scarlet.Implemets()` on all tables implementing the passed `interface`.
 
-## `Scarlet.Implements(t: [any]: any, interface: Interface)` -> `Disconnect`
+## `Scarlet.Implements(t: [any]: any, interface: Interface)` -> `Connection`
 Implements the passed `interface` onto the passed `t` object.
 
 # Interface
@@ -30,20 +30,20 @@ Optional field holding a reference to either a function or non nil value that wi
 
 an example of this is a character added event, listening to the event and also calling a custom `onCharacterAdded` method to kick off state incase we miss the initial event invocation.
 
-# Disconnect
+# Connection
 Object returned by Scarlets constructor methods as a means to clean up connections made.
 
-## `Connection` = `{ Disconnect: () -> () }`
+## `conn` = `{ Disconnect: () -> nil } | RBXScriptConnection`
 
-## `ConnectionArray` = `{ [any]: Connection }`
+## `ConnectionArray` = `{ [any]: conn }`
 
-## `Disconnect.new(connection: ConnectionArray)` -> `Disconnect`
+## `Connection.new(connections: ConnectionArray)` -> `Connection`
 
-## `Disconnect:AddConnection(connection: Connection)`
+## `Connection:Add(c: conn)`
 NOTE: Diconnect objects can consume themselves
 
-## `Disconnect:Disconnect()`
+## `Connection:Disconnect()`
 Cleans all connection objects
 
-## `@alias Disconnect:Destroy()`
+## `@alias Connection:Destroy()`
 Cleans all connection objects

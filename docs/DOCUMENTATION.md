@@ -205,7 +205,8 @@ Obviously this is a pretty impractical setup, but the idea is there nonetheless.
 `Scarlet.Mount()` also listens to table additions, automatically calling `Scarlet.Implements()` on the newly added table
 
 ```lua
-local services = Scarlet.Mount({}, Scarlet.Interfaces.myTest)
+local services = {}
+Scarlet.Mount(services, Scarlet.Interfaces.myTest)
 
 services.MyService = {
 	init = function() end,
@@ -267,21 +268,17 @@ local test = Knit.CreateService {
 	Client = {},
 }
 
-
 function test:OnPlayerAdded(player)
 
 end
-
 
 function test:KnitStart()
 
 end
 
-
 function test:KnitInit()
 
 end
-
 
 return test
 ```

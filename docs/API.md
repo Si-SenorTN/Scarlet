@@ -40,7 +40,7 @@ Object returned by Scarlets constructor methods as a means to clean up connectio
 ## `Connection.new(connections: ConnectionArray)` -> `Connection`
 
 ## `Connection:Add(c: conn)`
-NOTE: Diconnect objects can consume themselves
+NOTE: Disconnect objects can consume themselves
 
 ## `Connection:Disconnect()`
 Cleans all connection objects

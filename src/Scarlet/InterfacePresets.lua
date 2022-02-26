@@ -19,17 +19,17 @@
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
-type t = {
+export type t = {
 	[any]: any
 }
 
-type Interface = {
+export type Interface = {
 	Event: RBXScriptSignal,
 	self: t,
 	GetExisting: ((...any) -> t?) | Instance?
 }
 
-type InterfaceDictionary = {
+export type InterfaceDictionary = {
 	[string]: Interface
 }
 

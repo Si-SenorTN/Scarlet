@@ -14,6 +14,8 @@ Installing Scarlet is very easy. Simply download Scarlet as a `zip` file and ins
 
 Scarlets preferred home is `ReplicatedStorage`, but it can technically exist anywhere.
 
+`wally`: `si-senortn/scarlet@1`
+
 # Usage
 
 read the [documentation](url.github.io/scarlet) for example usage.

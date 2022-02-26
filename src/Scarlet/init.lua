@@ -1,9 +1,5 @@
 --!strict
 
--- Scarlet
--- Senor
--- 10/6/21
-
 local MountUtils = require(script.Util.MountUtils)
 local Connection = require(script.Util.Connection)
 
@@ -12,27 +8,12 @@ local interfaces = require(script.InterfacePresets)
 
 local Scarlet = {}
 
-type t = {
-	[any]: any
-}
-
-type Interface = {
-	Event: RBXScriptSignal,
-	self: t,
-	GetExisting: ((...any) -> t) | Instance?
-}
-
-type InterfaceDictionary = {
-	[string]: Interface
-}
-
-
-function Scarlet.Mount(objectThatContainsManyObjects: t, interface: InterfaceDictionary)
+function Scarlet.Mount(objectThatContainsManyObjects: interfaces.t, interface: interfaces.InterfaceDictionary)
 	local connection = Connection.new({})
 
 	-- mount to existing objects
-	for index, newObject in pairs(objectThatContainsManyObjects) do
-		if type(index) == "string" and type(newObject) == "table" then
+	for _, newObject in pairs(objectThatContainsManyObjects) do
+		if type(newObject) == "table" then
 			connection:Add(Scarlet.Implements(newObject, interface))
 		end
 	end
@@ -45,8 +26,7 @@ function Scarlet.Mount(objectThatContainsManyObjects: t, interface: InterfaceDic
 	return connection
 end
 
-
-function Scarlet.Implements(object: t, interface: InterfaceDictionary)
+function Scarlet.Implements(object: interfaces.t, interface: interfaces.InterfaceDictionary)
 	local connection = Connection.new({})
 
 	for methodName, methodData in pairs(interface) do
@@ -54,36 +34,43 @@ function Scarlet.Implements(object: t, interface: InterfaceDictionary)
 			continue
 		end
 
-		if methodData.GetExisting then
-			if type(methodData.GetExisting) == "function" then
-				-- TODO: match all cases, not just table returns
-				for _, v in pairs(methodData.GetExisting(methodData.self)) do
-					task.spawn(object[methodName], object, v)
+		local getExisting = methodData.GetExisting
+		local method = object[methodName]
+
+		if getExisting then
+			if type(getExisting) == "function" then
+				local recieved = getExisting(methodData.self)
+				local returnType = typeof(recieved)
+
+				if returnType == "table" then
+					for _, v in pairs(recieved) do
+						task.spawn(method, object, v)
+					end
+				else
+					method(methodData.self, recieved)
 				end
 			else
-				object[methodName](object, methodData.GetExisting)
+				method(object, getExisting)
 			end
 		end
 
 		connection:Add(methodData.Event:Connect(function(...)
-			object[methodName](object, ...)
+			method(object, ...)
 		end))
 	end
 
 	return connection
 end
 
-
 do
 	Scarlet.Interfaces = interfaces
 
 	Scarlet.Copy = MountUtils.Copy
-	function Scarlet.Extend(tab: t, extension)
+	function Scarlet.Extend(tab: interfaces.t, extension)
 		return MountUtils.Extend(MountUtils.Copy(tab), extension)
 	end
 
 	applyNameConvention(Scarlet)
 end
-
 
 return Scarlet

@@ -250,9 +250,8 @@ local someServiceDirectory
 local Scarlet = require(ReplicatedStorage.Scarlet)
 local Knit = require(ReplicatedStorage.Knit)
 
-Scarlet.Mount(Knit.Services, Scarlet.Interfaces.myTest)
-
-Knit.AddServices(someServiceDirectory)
+local services = Knit.AddServices(someServiceDirectory)
+Scarlet.Mount(services, Scarlet.Interfaces.myTest)
 
 Knit.Start()
 ```

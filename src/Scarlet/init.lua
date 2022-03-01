@@ -40,14 +40,13 @@ function Scarlet.Implements(object: interfaces.t, interface: interfaces.Interfac
 		if getExisting then
 			if type(getExisting) == "function" then
 				local recieved = getExisting(methodData.self)
-				local returnType = typeof(recieved)
 
-				if returnType == "table" then
+				if type(recieved) == "table" then
 					for _, v in pairs(recieved) do
 						task.spawn(method, object, v)
 					end
 				else
-					method(methodData.self, recieved)
+					method(object, recieved)
 				end
 			else
 				method(object, getExisting)

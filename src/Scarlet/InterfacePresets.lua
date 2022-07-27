@@ -34,14 +34,17 @@ export type InterfaceDictionary = {
 }
 
 type Objects = {
-	[t]: InterfaceDictionary
+	[t]: InterfaceDictionary,
 }
 
 
 local interfaces: Objects = {}
 
 -- inject a test object
-interfaces.MyObject = {}
+interfaces = {
+	Services = {},
+	Controllers = {}
+}
 
 if RunService:IsServer() then
 	local playerAddedInterface = {
@@ -50,15 +53,17 @@ if RunService:IsServer() then
 		GetExisting = Players.GetPlayers
 	}
 
-	interfaces.MyObject.OnPlayerAdded = playerAddedInterface
+	interfaces.Services.OnPlayerAdded = playerAddedInterface
 elseif RunService:IsClient() then
 	local player = Players.LocalPlayer
 
-	interfaces.MyObject.OnCharacterAdded = {
+	local characterAddedInterface = {
 		self = player,
 		Event = player.CharacterAdded,
 		GetExisting = player.Character
 	}
+
+	interfaces.Controllers.OnCharacterAdded = characterAddedInterface
 end
 
 return interfaces

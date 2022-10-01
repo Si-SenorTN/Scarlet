@@ -106,7 +106,7 @@ return testObject
 Obviously, this instance method `OnPlayerAdded` will not do anything yet. Lets add our test interface to this class:
 
 ```lua
-local Scarlet = require(game:GetService("Scarlet")) -- NEW
+local Scarlet = require(game:GetService("ReplicatedStorage").Scarlet) -- NEW
 
 local testObject = {}
 testObject.__index = testObject
@@ -179,7 +179,7 @@ function testObject.new(instance: Instance)
 end
 ```
 
-Once extended, it will **not** overwrite the original interface, this makes using template interfaces much more convenient.
+Once extended, it will **not** mutate the original interface, this makes using template interfaces much more convenient.
 
 ## Mount
 

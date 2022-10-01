@@ -1,16 +1,13 @@
 # Scarlet
 
-## `Scarlet.Interfaces: [InterfaceDictionary]: Interface`
+## `Scarlet.Interfaces: Dictionary<Interfaces>`
 Dictionary containing template interfaces for scarlet.
-
-## `Scarlet.Copy(t: [any]: any)` -> `[any]: any`
-Copies a table.
 
 ## `Scarlet.Extend(t: [any]: any, extension: [any]: any)` -> `[any]: any`
 Copies and extends a table, leaving the original table alone.
 
 ## `Scarlet.Mount(t: [any]: any, interface: Interface)` -> `Connection`
-Mounts and listens to added tables from `t`, natively calls `Scarlet.Implemets()` on all tables implementing the passed `interface`.
+Mounts and listens to added tables from `t`, internally calls `Scarlet.Implemets()` on all tables implementing the passed `interface`.
 
 ## `Scarlet.Implements(t: [any]: any, interface: Interface)` -> `Connection`
 Implements the passed `interface` onto the passed `t` object.
@@ -35,9 +32,7 @@ Object returned by Scarlets constructor methods as a means to clean up connectio
 
 ## `conn` = `{ Disconnect: () -> nil } | RBXScriptConnection`
 
-## `ConnectionArray` = `{ [any]: conn }`
-
-## `Connection.new(connections: ConnectionArray)` -> `Connection`
+## `Connection.new(connections: Array<conn>)` -> `Connection`
 
 ## `Connection:Add(c: conn)`
 NOTE: Disconnect objects can consume themselves

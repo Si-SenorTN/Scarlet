@@ -10,7 +10,6 @@ local Types = require(script.Types)
 local Scarlet = {}
 --[[
 	@interface Interfaces
-	@readonly
 ]]
 Scarlet.Interfaces = require(script.InterfacePresets)
 Scarlet.interfaces = Scarlet.Interfaces
@@ -79,7 +78,7 @@ Scarlet.implements = Scarlet.Implements
 
 --[[
 	@param objectThatContainsManyObjects any
-	@param
+	@param interfaces Interface
 	@return Connection
 
 	Mounts and listens to added tables from `t`, internally calls `Scarlet.Implemets()` on all tables implementing the passed `interface`.

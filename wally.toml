@@ -1,6 +1,6 @@
 [package]
 name = "si-senortn/scarlet"
 description = "object event utility framework"
-version = "1.1.3-rc.0"
+version = "1.1.3"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"

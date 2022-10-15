@@ -37,7 +37,6 @@ local interfaces: Dictionary<Types.Interfaces> = {
 			GetExisting = Players.GetPlayers,
 		},
 		OnPlayerRemoving = {
-			self = Players,
 			Event = Players.PlayerRemoving,
 		},
 	},
@@ -50,7 +49,9 @@ if RunService:IsClient() then
 		OnCharacterAdded = {
 			self = player,
 			Event = player.CharacterAdded,
-			GetExisting = player.Character,
+			GetExisting = function()
+				return player.Character or player.CharacterAdded:Wait()
+			end,
 		},
 	}
 end
